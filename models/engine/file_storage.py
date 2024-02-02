@@ -74,10 +74,9 @@ class FileStorage:
 
         for clss in classes:
             if cls is classes[clss]:
-                objs = self.__session.query(classes[clss]).all()
-                for obj in objs:
-                    if id == obj.id:
-                        return (obj)
+                for key, value in self.__objects.items():
+                    if key == value.__class__.__name__ + '.' + id:
+                        return (value) 
 
         return (None)
 
