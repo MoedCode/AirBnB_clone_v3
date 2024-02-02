@@ -73,7 +73,7 @@ class FileStorage:
         """Returns the object based on the class and its ID"""
 
         for clss in classes:
-            if cls is classes[clss] or cls is clss:
+            if cls is classes[clss]:
                 objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
                     if id == obj.id:
