@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entries Table</title>
+</head>
+<body>
+    <h1>Entries Table</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Text</th>
+            </tr>
+        </thead>
+        <tbody id="entries-table-body"></tbody>
+    </table>
+
+    <script>
+        // Fetch entries from the API and populate the table
+        fetch('/api/entries')
+            .then(response => response.json())
+            .then(entries => {
+                const tableBody = document.getElementById('entries-table-body');
+                entries.forEach(entry => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).textContent = entry.id;
+                    row.insertCell(1).textContent = entry.title;
+                    row.insertCell(2).textContent = entry.text;
+                });
+            })
+            .catch(error => console.error('Error fetching entries:', error));
+    </script>
+</body>
+</html>
