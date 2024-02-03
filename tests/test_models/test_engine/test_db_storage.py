@@ -87,12 +87,11 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """Test that save properly saves objects to file.json"""
 
-    def test_storage_get(self):
+    def test_get(self):
         """
         Test to verify the correctness of the 'get' method in retrieving objects.
         """
-        # Create a new State object with name "Cali"
-        new_state = State(name="Cali")
+        new_state = State(name="California")
 
         # Add the new_state object to the storage
         storage.new(new_state)

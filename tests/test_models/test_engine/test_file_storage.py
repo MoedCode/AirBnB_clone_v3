@@ -114,12 +114,11 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
-    def test_storage_get(self):
+    def test_get(self):
         """
         Test to verify the correctness of the 'get' method in retrieving objects.
         """
-        # Create a new State object with name "Cali"
-        new_state = State(name="Cali")
+        new_state = State(name="California")
 
         # Add the new_state object to the storage
         storage.new(new_state)
