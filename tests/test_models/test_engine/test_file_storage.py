@@ -114,7 +114,7 @@ class TestFileStorage(unittest.TestCase):
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
 
-    def test_fs_storage_get(self):
+    def test_storage_get(self):
         """
         Test to verify the correctness of the 'get' method in retrieving objects.
         """
