@@ -14,6 +14,8 @@ APP.url_map.strict_slashes = False
 
 HOST = getenv('HBNB_API_HOST')
 PORT = getenv('HBNB_API_PORT')
+
+
 @APP.teardown_appcontext
 def close(self):
     """close the session"""
@@ -22,9 +24,9 @@ def close(self):
 
 @APP.errorhandler(404)
 def Error_404(error):
-    '''return render_template'''
-    ErroDict = {'error': 'Not found'}
-    return jsonify(ErroDict), 404
+    '''return a Error dictionary '''
+    ErrDict = {'error': 'Not found'}
+    return jsonify(ErrDict), 404
 
 
 if __name__ == "__main__":
