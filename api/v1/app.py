@@ -24,9 +24,9 @@ def close(self):
 
 @APP.errorhandler(404)
 def Error_404(error):
-    '''return a Error dictionary '''
-    ErrDict = {'error': 'Not found'}
-    return jsonify(ErrDict), 404
+    '''return render_template'''
+    ErroDict = {'error': 'Not found'}
+    return jsonify(ErroDict), 404
 
 
 if __name__ == "__main__":
