@@ -12,15 +12,15 @@ from models.user import User
 
 
 @app_views.route('status', strict_slashes=False)
-def statusok():
-    """status home page"""
+def home_statues():
+    """Home Page Status """
     status = {"status": "OK"}
     return jsonify(status), 200
 
 
 @app_views.route('stats', strict_slashes=False)
-def statssok():
-    """stats home page"""
+def home_api():
+    """BNB routs"""
     data = {
         "amenities": storage.count(Amenity),
         "cities": storage.count(City),
