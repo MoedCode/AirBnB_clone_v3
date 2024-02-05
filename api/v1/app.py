@@ -18,13 +18,13 @@ PORT = getenv('HBNB_API_PORT')
 
 @APP.teardown_appcontext
 def close(self):
-    """close the session"""
+    """sqlalchemy session closing """
     storage.close()
 
 
 @APP.errorhandler(404)
 def page_not_found(error):
-    '''return render_template'''
+    """rending a html temple"""
     data = {'error': 'Not found'}
     return jsonify(data), 404
 
