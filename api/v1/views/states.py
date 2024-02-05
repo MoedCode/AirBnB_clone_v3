@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 from flask import jsonify
 from models.state import State, abort
 from models import storage
