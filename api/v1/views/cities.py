@@ -10,15 +10,15 @@ from models.state import State
 
 @app_views.route('/states/<string:state_id>/cities', methods=['GET'],
                  strict_slashes=False)
-def get_cities(state_id):
-    """get city information for all cities in a specified state"""
-    state = storage.get(State, state_id)
-    if state is None:
+def getCites_byStIdd(state_id):
+    """ git city by state ide """
+    state_inst = storage.get(State, state_id)
+    if state_inst is None:
         abort(404)
-    cities = []
-    for city in state.cities:
-        cities.append(city.to_dict())
-    return jsonify(cities)
+    cities_list = []
+    for city in state_inst.cities:
+        cities_list.append(city.to_dict())
+    return jsonify(cities_list)
 
 
 @app_views.route('/cities/<string:city_id>', methods=['GET'],
