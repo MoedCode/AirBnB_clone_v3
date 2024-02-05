@@ -8,31 +8,31 @@ from models.state import State
 
 
 @app_views.route('/states/', methods=['GET'])
-def get_states():
-    """cash all state objects from storage"""
-    states_obj = storage.all('State')
-    states_lis = []
-    for state in states_obj.values():
-        states_lis.append(state.to_dict())
-    return jsonify(states_lis)
+def listofstatus():
+    """comment for func"""
+    ob = storage.all('State')
+    ll = []
+    for state in ob.values():
+        ll.append(state.to_dict())
+    return jsonify(ll)
 
 
 @app_views.route('/states/<string:state_id>/', methods=['GET'])
-def getState_byId(state_id):
-    """rout state data for specified id"""
-    state_inst = storage.get(State, state_id)
-    if not state_inst:
+def StatusWithId(state_id):
+    """gets obj with id"""
+    ob = storage.get(State, state_id)
+    if not ob:
         abort(404, 'Not found')
-    return jsonify(state_inst.to_dict()), 200
+    return jsonify(ob.to_dict()), 200
 
 
 @app_views.route('/states/<string:state_id>/', methods=['DELETE'])
-def del_state_byId(state_id):
-    """Deletes A   specified state by id"""
-    state_obj = storage.get('State', state_id)
-    if state_obj is None:
+def DeleteObj(state_id):
+    """deletes obj"""
+    x = storage.get('State', state_id)
+    if x is None:
         abort(404)
-    storage.delete(state_obj)
+    storage.delete(x)
     storage.save()
     return jsonify({}), 200
 
