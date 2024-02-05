@@ -8,8 +8,8 @@ from models.state import State
 
 
 @app_views.route('/states/', methods=['GET'])
-def listofstatus():
-    """comment for func"""
+def get_states():
+    """cash all state objects from storage"""
     states_obj = storage.all('State')
     states_lis = []
     for state in states_obj.values():
