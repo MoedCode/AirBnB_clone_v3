@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-"""this is flask APP"""
-
 from flask import Flask, jsonify
 from models import storage
 from os import getenv
