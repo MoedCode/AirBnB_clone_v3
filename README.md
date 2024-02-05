@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project is an AirBnB clone RESTful API developed using Python and Flask. It aims to replicate the functionality of the popular accommodation booking platform, providing a simplified version of the core features through a well-designed API.
+This  project is an AirBnB clone RESTful API developed using Python and Flask. It aims to replicate the functionality of the popular accommodation booking platform, providing a simplified version of the core features through a well-designed API.
 
 ## Authors
 
