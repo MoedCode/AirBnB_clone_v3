@@ -15,6 +15,7 @@ APP.url_map.strict_slashes = False
 host = getenv('HBNB_API_HOST')
 port = getenv('HBNB_API_PORT')
 
+
 @APP.teardown_appcontext
 def close(self):
     """close the session"""
