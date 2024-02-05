@@ -33,12 +33,12 @@ def getCity_byId(city_id):
 
 @app_views.route('/cities/<string:city_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete_city(city_id):
-    """deletes a city based on its city_id"""
-    city = storage.get(City, city_id)
-    if city is None:
+def deleteCity_byID(city_id):
+    """deletes a city by id"""
+    city_inst = storage.get(City, city_id)
+    if city_inst is None:
         abort(404)
-    city.delete()
+    city_inst.delete()
     storage.save()
     return (jsonify({}))
 
