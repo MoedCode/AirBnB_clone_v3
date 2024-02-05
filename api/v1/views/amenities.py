@@ -7,8 +7,6 @@ from flask import jsonify, abort, request
 from models.state import State
 from models import storage
 import jason
-
-
 @app_views.route("/amenities", methods=['GET'])
 def get_all_amenities():
     """retuen all aminities """
@@ -18,7 +16,7 @@ def get_all_amenities():
 
 @app_views.route("/amenities/<amenity_id>", methods=['GET'])
 def get_amenity(amenity_id):
-    """retuen all aminities"""
+    """retuen aminities"""
     amenity = storage.get(Amenity, amenity_id)
     if not amenity:
         abort(404)
@@ -51,7 +49,7 @@ def create_amenity():
 
 @app_views.route("/amenities/<amenity_id>", methods=['PUT'])
 def update_amenity(amenity_id):
-    """Update an existing amenity"""
+    """Update existing amenity"""
     amenity = storage.get(Amenity, amenity_id)
     if not amenity:
         abort(404)
