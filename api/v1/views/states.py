@@ -18,12 +18,12 @@ def get_states():
 
 
 @app_views.route('/states/<string:state_id>/', methods=['GET'])
-def StatusWithId(state_id):
-    """gets obj with id"""
-    ob = storage.get(State, state_id)
-    if not ob:
+def getState_byId(state_id):
+    """rout state data for specified id"""
+    state_inst = storage.get(State, state_id)
+    if not state_inst:
         abort(404, 'Not found')
-    return jsonify(ob.to_dict()), 200
+    return jsonify(state_inst.to_dict()), 200
 
 
 @app_views.route('/states/<string:state_id>/', methods=['DELETE'])
