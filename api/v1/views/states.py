@@ -8,13 +8,13 @@ from models.state import State
 
 
 @app_views.route('/states/', methods=['GET'])
-def get_states():
-    "cash all state objects from storage"
-    states_list = []
-    states_inst_list = storage.all('State')
-    for state_inst in states_inst_list:
-        states_list.append(state_inst.to_dict())
-    return (states_list)
+def listofstatus():
+    """comment for func"""
+    ob = storage.all('State')
+    ll = []
+    for state in ob.values():
+        ll.append(state.to_dict())
+    return jsonify(ll)
 
 
 @app_views.route('/states/<string:state_id>/', methods=['GET'])
@@ -56,7 +56,7 @@ def putstate(state_id):
     return jsonify(stateObject.to_dict()), '200'
 
 
-@app_views.route@app_views.route('/states/', methods=['POST'])
+@app_views.route('/states/', methods=['POST'])
 def poststate():
     """post state"""
     response = request.get_json()
