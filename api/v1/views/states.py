@@ -26,45 +26,36 @@ def getState_byId(state_id):
     return jsonify(state_inst.to_dict()), 200
 
 
+
 @app_views.route('/states/<string:state_id>/', methods=['DELETE'])
-def DeleteObj(state_id):
-    """deletes obj"""
-    x = storage.get('State', state_id)
-    if x is None:
+def del_state(state_id):
+    """Deletes A specified state by id"""
+    state_obj = storage.get('State', state_id)
+    if state_obj is None:
         abort(404)
-    storage.delete(x)
+    storage.delete(state_obj)
     storage.save()
     return jsonify({}), 200
 
 
-@app_views.route('/states/<string:state_id>/', methods=['PUT'])
-def putstate(state_id):
-    """put state"""
-    response = request.get_json()
-    if not response:
-        abort(400, {'Not a JSON'})
-    if response.get('name') is None:
-        abort(400, {'Missing name'})
-    stateObject = storage.get('State', state_id)
-    if stateObject is None:
-        abort(404)
-    ignoreKeys = ['id', 'created_at', 'updated_at']
-    for key, val in response.items():
-        if key not in ignoreKeys:
-            setattr(stateObject, key, val)
-    storage.save()
-    return jsonify(stateObject.to_dict()), '200'
-
-
 @app_views.route('/states/', methods=['POST'])
-def poststate():
-    """post state"""
-    response = request.get_json()
-    if not response:
+def post_state():
+    """obtaining a state data instantiate state """
+    # receive a post request
+    state_JData = request.get_json()
+    #vallation checks
+    if not state_JData:
         abort(400, {'Not a JSON'})
-    if not response.get('name'):
+    if not state_JData.get('name'):
         abort(400, {'Missing name'})
-    stateObject = State(**response)
-    storage.new(stateObject)
+
+    #insatiate instant with request data
+    state_inst = State(**state_JData)
+
+    # update storage type with state data and save
+    storage.new(state_inst)
     storage.save()
-    return jsonify(stateObject.to_dict()), '201'
+    # 201 indicates that the saving process is done
+    return jsonify(state_inst.to_dict()),'201'
+
+
