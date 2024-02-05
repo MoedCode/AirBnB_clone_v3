@@ -16,7 +16,6 @@ def get_reviews(place_id):
         abort(404)
     return jsonify([review.to_dict() for review in place.reviews])
 
-
 @app_views.route("/reviews/<review_id>")
 def get_review(review_id):
     """return review"""
@@ -24,7 +23,6 @@ def get_review(review_id):
     if not review:
         abort(404)
     return jsonify(review.to_dict())
-
 
 @app_views.route("/reviews/<review_id>", methods=['DELETE'])
 def delete_review(review_id):
