@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 from flask import jsonify, abort, request
 from api.v1.views import app_views
-from models.state import State
 from models import storage
-from models.user import User
+from models.state import State
 
 # Retrieves the list of all /Retrieves a
 
