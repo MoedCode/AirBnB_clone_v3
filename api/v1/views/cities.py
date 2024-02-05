@@ -24,7 +24,7 @@ def CitiesBySateId(state_id):
 @app_views.route('/cities/<string:city_id>', methods=['GET'],
                  strict_slashes=False)
 def getCityById(city_id):
-    """get city by id"""
+    """get city by idb"""
     x = storage.get(City, city_id)
     if not x:
         abort(404)
