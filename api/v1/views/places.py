@@ -18,7 +18,6 @@ def get_places(city_id):
         abort(404)
     return jsonify([place.to_dict() for place in city.places])
 
-
 @app_views.route("/places/<place_id>")
 def get_place(place_id):
     """ get method"""
@@ -26,7 +25,6 @@ def get_place(place_id):
     if not place:
         abort(404)
     return jsonify(place.to_dict())
-
 
 @app_views.route("/places/<place_id>", methods=['DELETE'])
 def delete_place(place_id):
