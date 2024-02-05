@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""status routs file"""
+"""the index file for stats"""
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
@@ -12,21 +12,21 @@ from models.user import User
 
 
 @app_views.route('status', strict_slashes=False)
-def home_statues():
-    """Home Page Status """
+def statusok():
+    """status home page"""
     status = {"status": "OK"}
     return jsonify(status), 200
 
 
 @app_views.route('stats', strict_slashes=False)
-def home_api():
-    """BNB routs"""
+def statssok():
+    """stats home page"""
     data = {
-        "amenities": storage.count(Amenity),
-        "cities": storage.count(City),
-        "places": storage.count(Place),
-        "reviews": storage.count(Review),
-        "states": storage.count(State),
-        "users": storage.count(User),
-    }
+            "amenities": storage.count(Amenity),
+            "cities": storage.count(City),
+            "places": storage.count(Place),
+            "reviews": storage.count(Review),
+            "states": storage.count(State),
+            "users": storage.count(User),
+           }
     return jsonify(data)
