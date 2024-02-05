@@ -12,9 +12,6 @@ APP.register_blueprint(app_views)
 cors = CORS(APP, resources={r"/api/v1/*": {"origins": "*"}})
 APP.url_map.strict_slashes = False
 
-host = getenv('HBNB_API_HOST')
-port = getenv('HBNB_API_PORT')
-
 
 @APP.teardown_appcontext
 def close(self):
@@ -30,6 +27,8 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
+    host = getenv('HBNB_API_HOST')
+    port = getenv('HBNB_API_PORT')
     if not host:
         host = '0.0.0.0'
     if not port:
