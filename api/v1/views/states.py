@@ -56,3 +56,27 @@ def post_state():
     storage.save()
     # 201 indicates that the saving process is done
     return jsonify(state_inst.to_dict()), '201'
+
+
+@app_views.route('/states/<string:state_id>/', methods=['PUT'])
+def put_state(state_id):
+    """ state data update state obtained"""
+    # validation
+    state_JData = request.get_json()
+    if not state_JData:
+        abort(400, {'Not a JSON'})
+    if state_JData.get('name') is None:
+        abort(400, {'Missing name'})
+    # get state instance fro storage
+    state_inst = storage.get('State', state_id)
+    if state_inst is None:
+        abort(404)
+    # avoid keys that shouldn't be change
+    void_keys = ['created_at', 'id', 'updated_at']
+    for key, value in state_JData:
+        if key not in void_keys:
+            setattr(state_inst, key, value)
+    # save changes to storage
+    storage.save()
+
+    return jsonify(state_inst.to_dict()), 200
