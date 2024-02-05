@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-from api.v1.views import app_views
 from flask import jsonify, abort, request
-from models import storage
 from models.state import State
+from models import storage
+from api.v1.views import app_views
 
 # Retrieves the list of all /Retrieves a
 
@@ -39,36 +39,3 @@ def del_state(state_id):
     return jsonify({}), 200
 
 # Creates a
-
-
-@app_views.route('/states/<string:state_id>/', methods=['PUT'])
-def putstate(state_id):
-    """put state"""
-    response = request.get_json()
-    if not response:
-        abort(400, {'Not a JSON'})
-    if response.get('name') is None:
-        abort(400, {'Missing name'})
-    stateObject = storage.get('State', state_id)
-    if stateObject is None:
-        abort(404)
-    ignoreKeys = ['id', 'created_at', 'updated_at']
-    for key, val in response.items():
-        if key not in ignoreKeys:
-            setattr(stateObject, key, val)
-    storage.save()
-    return jsonify(stateObject.to_dict()), '200'
-
-
-@app_views.route('/states/', methods=['POST'])
-def poststate():
-    """post state"""
-    response = request.get_json()
-    if not response:
-        abort(400, {'Not a JSON'})
-    if not response.get('name'):
-        abort(400, {'Missing name'})
-    stateObject = State(**response)
-    storage.new(stateObject)
-    storage.save()
-    return jsonify(stateObject.to_dict()), '201'
