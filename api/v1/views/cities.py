@@ -23,12 +23,12 @@ def getCites_byStIdd(state_id):
 
 @app_views.route('/cities/<string:city_id>', methods=['GET'],
                  strict_slashes=False)
-def get_city(city_id):
-    """get city information for specified city"""
-    city = storage.get(City, city_id)
-    if city is None:
+def getCity_byId(city_id):
+    """get city by id"""
+    city_inst = storage.get(City, city_id)
+    if city_inst is None:
         abort(404)
-    return jsonify(city.to_dict())
+    return jsonify(city_inst.to_dict())
 
 
 @app_views.route('/cities/<string:city_id>', methods=['DELETE'],
