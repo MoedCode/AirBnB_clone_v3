@@ -17,7 +17,6 @@ def get_states():
     return (states_list)
 
 
-
 @app_views.route('/states/<string:state_id>/', methods=['GET'])
 def StatusWithId(state_id):
     """gets obj with id"""
@@ -69,5 +68,3 @@ def poststate():
     storage.new(stateObject)
     storage.save()
     return jsonify(stateObject.to_dict()), '201'
-
-
