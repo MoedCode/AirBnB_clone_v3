@@ -5,15 +5,16 @@ from models.state import State
 from models import storage
 from models.user import User
 
+
 def instantiate_user():
     """obtain user Data && instantiate User instance """
     usr_JData = request.get_json()
     # data validation
     if not usr_JData:
-        return jsonify({"error":"Not a Json"}), 400
+        return jsonify({"error": "Not a Json"}), 400
     if not usr_JData.get('email'):
         return jsonify({"error": "Missing email"}), 400
-    if not usr_JData :
+    if not usr_JData:
         return jsonify({"error": "Missing password"}), 400
     # now data is valid use to create user instance
     user_inst = User(**usr_JData)
