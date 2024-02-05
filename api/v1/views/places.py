@@ -9,7 +9,6 @@ from models.place import Place
 from models.user import User
 from flask import abort, request, jsonify
 
-
 @app_views.route("/cities/<city_id>/places")
 def get_places(city_id):
     """ get method"""
