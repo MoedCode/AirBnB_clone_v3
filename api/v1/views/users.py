@@ -40,29 +40,24 @@ def deleteUser_byId(user_id):
 
 
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
-def create_user():
+def post_user():
     """obtain user Data && instantiate User instance """
-    usr_JData = request.get_json()
-    # data validation
-    if not usr_JData:
-        return jsonify({"error": "Not a Json"}), 400
-    if not usr_JData.get('email'):
-        return jsonify({"error": "Missing email"}), 400
-    if not usr_JData:
-        return jsonify({"error": "Missing password"}), 400
-    # now data is valid use to create user instance
-    user_inst = User(**usr_JData)
-    # update storage type with user instance and save
-    storage.new(user_inst)
-    storage.save()
-    # return user data with 201 indicates that saving process Done
-    return jsonify(user_inst.to_dict()), 201
+    userJ_data = request.get_json()
+    if not userJ_data:
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+    if 'email' not in userJ_data:
+        return make_response(jsonify({'error': 'Missing email'}), 400)
+    if 'password' not in userJ_data:
+        return make_response(jsonify({'error': 'Missing password'}), 400)
+    user = User(**userJ_data)
+    user.save()
+    return make_response(jsonify(user.to_dict()), 201)
 
 
 @app_views.route('/users/<string:user_id>', methods=['PUT'],
                  strict_slashes=False)
-def put_user(user_id):
-    """update a user"""
+def update_user(user_id):
+    """update a user instance"""
     user = storage.get(User, user_id)
     if user is None:
         abort(404)
