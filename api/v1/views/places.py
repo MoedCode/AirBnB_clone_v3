@@ -88,23 +88,23 @@ def update_place(place_id):
 
 
 @app_views.route('/places_search', methods=['POST'], strict_slashes=False)
-def post_places_search():
-    """searches for a place"""
+def searchCreatPlace():
+    """searchCreatPlace"""
     if request.get_json() is not None:
-        params = request.get_json()
-        states = params.get('states', [])
-        cities = params.get('cities', [])
-        amenities = params.get('amenities', [])
+        place_arg = request.get_json()
+        ST_arg = place_arg.get('states', [])
+        cities = place_arg.get('cities', [])
+        amenities = place_arg.get('amenities', [])
         amenity_objects = []
         for amenity_id in amenities:
             amenity = storage.get(Amenity, amenity_id)
             if amenity:
                 amenity_objects.append(amenity)
-        if states == cities == []:
+        if ST_arg == cities == []:
             places = storage.all('Place').values()
         else:
             places = []
-            for state_id in states:
+            for state_id in ST_arg:
                 state = storage.get(State, state_id)
                 state_cities = state.cities
                 for city in state_cities:
