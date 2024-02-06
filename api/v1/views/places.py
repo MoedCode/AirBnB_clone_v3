@@ -14,25 +14,25 @@ from models.state import State
 
 @app_views.route('/cities/<string:city_id>/places', methods=['GET'],
                  strict_slashes=False)
-def get_places(city_id):
-    """get place information for all places in a specified city"""
-    city = storage.get(City, city_id)
-    if city is None:
+def getPlaces_CtyId(city_id):
+    """get place by city idy"""
+    city_obj = storage.get(City, city_id)
+    if city_obj is None:
         abort(404)
-    places = []
-    for place in city.places:
-        places.append(place.to_dict())
-    return jsonify(places)
+    places_list = []
+    for place in city_obj.places:
+        places_list.append(place.to_dict())
+    return jsonify(places_list)
 
 
 @app_views.route('/places/<string:place_id>', methods=['GET'],
                  strict_slashes=False)
-def get_place(place_id):
-    """get place information for specified place"""
-    place = storage.get(Place, place_id)
-    if place is None:
+def getPlace_Id(place_id):
+    """get place instance by id"""
+    place_inst = storage.get(Place, place_id)
+    if place_inst is None:
         abort(404)
-    return jsonify(place.to_dict())
+    return jsonify(place_inst.to_dict())
 
 
 @app_views.route('/places/<string:place_id>', methods=['DELETE'],
