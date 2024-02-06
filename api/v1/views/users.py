@@ -43,15 +43,18 @@ def deleteUser_byId(user_id):
 def post_user():
     """obtain user Data && instantiate User instance """
     userJ_data = request.get_json()
+    # data validation
     if not userJ_data:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     if 'email' not in userJ_data:
         return make_response(jsonify({'error': 'Missing email'}), 400)
     if 'password' not in userJ_data:
         return make_response(jsonify({'error': 'Missing password'}), 400)
-    user = User(**userJ_data)
-    user.save()
-    return make_response(jsonify(user.to_dict()), 201)
+    # now data is valid use to create user instance
+    user_inst = User(**userJ_data)
+    # update storage type with user instance and save
+    user_inst.save()
+    return make_response(jsonify(user_inst.to_dict()), 201)
 
 
 @app_views.route('/users/<string:user_id>', methods=['PUT'],
