@@ -19,12 +19,12 @@ def list_users():
 
 @app_views.route('/users/<string:user_id>', methods=['GET'],
                  strict_slashes=False)
-def get_user(user_id):
-    """get user information for specified user"""
-    user = storage.get(User, user_id)
-    if user is None:
+def getUser_byId(user_id):
+    """gets a user instance by id"""
+    user_inst = storage.get(User, user_id)
+    if user_inst is None:
         abort(404)
-    return jsonify(user.to_dict())
+    return jsonify(user_inst.to_dict())
 
 
 @app_views.route('/users/<string:user_id>', methods=['DELETE'],
