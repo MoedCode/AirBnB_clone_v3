@@ -94,9 +94,9 @@ def searchCreatPlace():
         place_arg = request.get_json()
         ST_arg = place_arg.get('states', [])
         cities = place_arg.get('cities', [])
-        amenities = place_arg.get('amenities', [])
+        amenities_arg = place_arg.get('amenities', [])
         amenity_objects = []
-        for amenity_id in amenities:
+        for amenity_id in amenities_arg:
             amenity = storage.get(Amenity, amenity_id)
             if amenity:
                 amenity_objects.append(amenity)

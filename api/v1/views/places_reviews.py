@@ -35,8 +35,8 @@ def ReviewById(review_id):
 
 @app_views.route('reviews/<string:review_id>', methods=['DELETE'],
                  strict_slashes=False)
-def DeleteReviewById(review_id):
-    """delete review by id"""
+def PL_DEL_id(review_id):
+    """PL_DEL_id(review_id):"""
     review = storage.get(Review, review_id)
     if review is None:
         abort(404)
@@ -47,8 +47,8 @@ def DeleteReviewById(review_id):
 
 @app_views.route('places/<string:place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
-def POSTReviewById(place_id):
-    """delete review by id"""
+def PL_postRev(place_id):
+    """ PL_postRev"""
     response = request.get_json()
     if not response:
         abort(400, {'error': 'Not a JSON'})
@@ -70,8 +70,8 @@ def POSTReviewById(place_id):
 
 @app_views.route('reviews/<string:review_id>', methods=['PUT'],
                  strict_slashes=False)
-def PUTReviewById(review_id):
-    """delete review by id"""
+def PA_review(review_id):
+    """d PA_review"""
     response = request.get_json()
     if not response:
         abort(400, {'error': 'Not a JSON'})
