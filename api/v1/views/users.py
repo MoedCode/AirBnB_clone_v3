@@ -29,12 +29,12 @@ def getUser_byId(user_id):
 
 @app_views.route('/users/<string:user_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete_user(user_id):
-    """deletes a user based on its user_id"""
-    user = storage.get(User, user_id)
-    if user is None:
+def deleteUser_byId(user_id):
+    """gets a user instance by id , then Delete it"""
+    user_inst = storage.get(User, user_id)
+    if user_inst is None:
         abort(404)
-    user.delete()
+    user_inst.delete()
     storage.save()
     return (jsonify({}))
 
