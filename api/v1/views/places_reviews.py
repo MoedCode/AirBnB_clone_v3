@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""comment for file"""
+""" PLACE REVIEW  ROUTS"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request
@@ -11,11 +11,11 @@ from models.user import User
 
 @app_views.route('places/<string:place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
-def ReviewByPlaces(place_id):
-    """get review by place id"""
-    reviews = storage.all('Review')
+def REVIEW_PACES_ID(place_id):
+    """REVIEW_PACES_ID(place_id):"""
+    reviews_all_list = storage.all('Review')
     ll = []
-    for val in reviews.values():
+    for val in reviews_all_list.values():
         if val.place_id == place_id:
             ll.append(val.to_dict())
     if len(ll) <= 0:
@@ -25,8 +25,8 @@ def ReviewByPlaces(place_id):
 
 @app_views.route('reviews/<string:review_id>', methods=['GET'],
                  strict_slashes=False)
-def ReviewById(review_id):
-    """get review by id"""
+def PR_ID(review_id):
+    """PR_ID(review_id):"""
     review = storage.get(Review, review_id)
     if not review:
         abort(404)
