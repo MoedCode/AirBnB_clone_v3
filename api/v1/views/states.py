@@ -9,21 +9,21 @@ from models.state import State
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_states():
-    """get state information for all states"""
-    states = []
+    """cash all state objects from storage"""
+    states_list = []
     for state in storage.all("State").values():
-        states.append(state.to_dict())
-    return jsonify(states)
+        states_list.append(state.to_dict())
+    return jsonify(states_list)
 
 
 @app_views.route('/states/<string:state_id>', methods=['GET'],
                  strict_slashes=False)
-def get_state(state_id):
-    """get state information for specified state"""
-    state = storage.get(State, state_id)
-    if state is None:
+def getState_byId(state_id):
+    """rout state data for specified id"""
+    state_inst = storage.get(State, state_id)
+    if state_inst is None:
         abort(404)
-    return jsonify(state.to_dict())
+    return jsonify(state_inst.to_dict())
 
 
 @app_views.route('/states/<string:state_id>', methods=['DELETE'],
