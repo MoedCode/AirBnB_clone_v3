@@ -54,7 +54,7 @@ def create_place(city_id):
     city_inst = storage.get(City, city_id)
     if city_inst is None:
         abort(404)
-        #vallation
+    #vallation
     if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
     cty_JData = request.get_json()
