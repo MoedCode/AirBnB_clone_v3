@@ -51,30 +51,29 @@ def del_placeById(place_id):
                  strict_slashes=False)
 def create_place(city_id):
     """obtain city data , create place instance"""
-    city_inst = storage.get(City, city_id)
-    if city_inst is None:
+    city = storage.get(City, city_id)
+    if city is None:
         abort(404)
-    #vallation
     if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    cty_JData = request.get_json()
-    if 'user_id' not in cty_JData:
+    kwargs = request.get_json()
+    if 'user_id' not in kwargs:
         return make_response(jsonify({'error': 'Missing user_id'}), 400)
-    user = storage.get(User, cty_JData['user_id'])
+    user = storage.get(User, kwargs['user_id'])
     if user is None:
         abort(404)
-    if 'name' not in cty_JData:
+    if 'name' not in kwargs:
         return make_response(jsonify({'error': 'Missing name'}), 400)
-    cty_JData['city_id'] = city_id
-    place_inst = Place(**cty_JData)
-    place_inst.save()
-    return make_response(jsonify(place_inst.to_dict()), 201)
+    kwargs['city_id'] = city_id
+    place = Place(**kwargs)
+    place.save()
+    return make_response(jsonify(place.to_dict()), 201)
 
 
 @app_views.route('/places/<string:place_id>', methods=['PUT'],
                  strict_slashes=False)
-def put_place(place_id):
-    """update a place"""
+def update_place(place_id):
+    """obtain place data , update place"""
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
