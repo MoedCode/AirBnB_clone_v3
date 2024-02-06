@@ -19,11 +19,11 @@ def list_amenities():
 @app_views.route('/amenities/<string:amenity_id>', methods=['GET'],
                  strict_slashes=False)
 def get_amenity(amenity_id):
-    """get amenity information for specified amenity"""
-    amenity = storage.get(Amenity, amenity_id)
-    if amenity is None:
+    """get amenity specified dictionary  """
+    amenity_inst = storage.get(Amenity, amenity_id)
+    if amenity_inst is None:
         abort(404)
-    return jsonify(amenity.to_dict())
+    return jsonify(amenity_inst.to_dict())
 
 
 @app_views.route('/amenities/<string:amenity_id>', methods=['DELETE'],
