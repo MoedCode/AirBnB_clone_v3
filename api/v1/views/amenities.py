@@ -8,12 +8,12 @@ from models.amenity import Amenity
 
 
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
-def get_amenities():
-    """get amenity information for all amenities"""
-    amenities = []
+def list_amenities():
+    """get amenity a list with all amenities dictionary"""
+    amenities_list = []
     for amenity in storage.all(Amenity).values():
-        amenities.append(amenity.to_dict())
-    return jsonify(amenities)
+        amenities_list.append(amenity.to_dict())
+    return jsonify(amenities_list)
 
 
 @app_views.route('/amenities/<string:amenity_id>', methods=['GET'],
