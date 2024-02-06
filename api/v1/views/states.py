@@ -28,26 +28,30 @@ def getState_byId(state_id):
 
 @app_views.route('/states/<string:state_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete_state(state_id):
-    """deletes a state based on its state_id"""
-    state = storage.get(State, state_id)
-    if state is None:
+def del_state(state_id):
+    """Deletes A specified state by id"""
+    state_obj = storage.get(State, state_id)
+    if state_obj is None:
         abort(404)
-    state.delete()
+    state_obj.delete()
     storage.save()
     return (jsonify({}))
 
 
 @app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def post_state():
-    """create a new state"""
-    if not request.get_json():
+    """obtaining a state data instantiate state"""
+    # receive a post request
+    state_JData = request.get_json()
+    # vallation checks
+    if not state_JData:
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    if 'name' not in request.get_json():
+    if 'name' not in state_JData:
         return make_response(jsonify({'error': 'Missing name'}), 400)
-    state = State(**request.get_json())
-    state.save()
-    return make_response(jsonify(state.to_dict()), 201)
+    # insatiate instant with request data
+    state_inst = State(**state_JData)
+    state_inst.save()
+    return make_response(jsonify(state_inst.to_dict()), 201)
 
 
 @app_views.route('/states/<string:state_id>', methods=['PUT'],
