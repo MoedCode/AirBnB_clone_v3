@@ -51,21 +51,21 @@ def del_placeById(place_id):
                  strict_slashes=False)
 def create_place(city_id):
     """obtain city data , create place instance"""
-    city = storage.get(City, city_id)
-    if city is None:
+    city_inst = storage.get(City, city_id)
+    if city_inst is None:
         abort(404)
     if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-    kwargs = request.get_json()
-    if 'user_id' not in kwargs:
+    JData = request.get_json()
+    if 'user_id' not in JData:
         return make_response(jsonify({'error': 'Missing user_id'}), 400)
-    user = storage.get(User, kwargs['user_id'])
+    user = storage.get(User, JData['user_id'])
     if user is None:
         abort(404)
-    if 'name' not in kwargs:
+    if 'name' not in JData:
         return make_response(jsonify({'error': 'Missing name'}), 400)
-    kwargs['city_id'] = city_id
-    place = Place(**kwargs)
+    JData['city_id'] = city_id
+    place = Place(**JData)
     place.save()
     return make_response(jsonify(place.to_dict()), 201)
 
