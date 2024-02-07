@@ -69,3 +69,4 @@ def update_state(state_id):
             setattr(state_obj, attr, val)
     state_obj.save()
     return jsonify(state_obj.to_dict())
+
