@@ -6,9 +6,6 @@ from models import storage
 from os import getenv
 from api.v1.views import app_views
 from flask_cors import CORS
-import sys
-sys.path.append('./api')
-sys.path.append('~/AirBnB_clone_v3/api')
 
 APP = Flask(__name__)
 APP.register_blueprint(app_views)
